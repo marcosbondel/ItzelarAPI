@@ -334,7 +334,7 @@ DEPENDENCIES
   kamal
   pg
   puma (>= 5.0)
-  rails (~> 8.0.2)
+  rails (= 8.0.2)
   rubocop-rails-omakase
   solid_cable
   solid_cache
