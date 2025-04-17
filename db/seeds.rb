@@ -7,13 +7,23 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+puts "Truncating Roles and Users"
+Role.destroy_all
+User.destroy_all
+
+puts "Running seeds..."
+puts "Creating roles..."
+['student', 'teacher', 'admin'].each do |role|
+    Role.find_or_create_by(name: role)
+end
 
 
+puts "Creating admin..."
 User.create(
     :name => "Admin",
     :email => "admin@usac.edu.gt",
-    :password => "12345678"
+    :password => "12345678",
+    :role => Role.find_by(name: "admin")
 )
 
-puts "Running seeds..."
-puts "Admin user created"
+puts "Finished seeding database"

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :enrollments
+  resources :questions
+  resources :exams
     # Defines the root path route ("/")
     # root "posts#index"
     

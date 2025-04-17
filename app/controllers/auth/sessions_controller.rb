@@ -27,6 +27,7 @@ module Auth
                 :lastname => sign_up_params[:lastname],
                 :email => sign_up_params[:email],
                 :password => sign_up_params[:password],
+                :role => Role.find_by(name: "student")
             )
 
             if new_user.save

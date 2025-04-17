@@ -12,7 +12,7 @@ class ApplicationApiController < ApplicationController
     
         decoded = decode(token)
         if decoded
-          @current_user = User.find_by(id: decoded[0][:user_id])
+          @current_user = User.find_by(id: decoded[0]['user_id'])
         else
           respond_with_unauthorized
         end

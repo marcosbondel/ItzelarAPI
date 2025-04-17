@@ -7,8 +7,8 @@ module Application
                 respond_with_http 200, data
             end
 
-            def respond_with_error message = "Something went wrong"
-                respond_with_http 400, { message: message } 
+            def respond_with_error message = "Something went wrong", details = []
+                respond_with_http 400, { message: message, details: details } 
             end
 
             def respond_with_not_found

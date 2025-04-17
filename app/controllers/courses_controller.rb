@@ -1,51 +1,62 @@
 class CoursesController < ApplicationApiController
-  before_action :set_course, only: %i[ show update destroy ]
+    before_action :set_course, only: %i[ show update destroy ]
 
-  # GET /courses
-  def index
-    @courses = Course.all
-
-    render json: @courses
-  end
-
-  # GET /courses/1
-  def show
-    render json: @course
-  end
-
-  # POST /courses
-  def create
-    @course = Course.new(course_params)
-
-    if @course.save
-      render json: @course, status: :created, location: @course
-    else
-      render json: @course.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /courses/1
-  def update
-    if @course.update(course_params)
-      render json: @course
-    else
-      render json: @course.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /courses/1
-  def destroy
-    @course.destroy!
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_course
-      @course = Course.find(params.expect(:id))
+    # GET /courses
+    def index
+        @courses = @current_user.programs
+        
+        respond_with_success @courses.list
     end
 
-    # Only allow a list of trusted parameters through.
-    def course_params
-      params.expect(course: [ :name, :description, :user_id ])
+    # GET /courses/1
+    def show
+        return respond_with_not_found if @course.nil?
+
+        respond_with_success @course.show
     end
+
+    # POST /courses
+    def create
+        @course = @current_user.programs.new(course_params)
+
+        unless @course.save
+            return respond_with_error "Course not created", @course.errors.full_messages
+        end
+
+        respond_with_success @course.show
+    end
+
+    # PATCH/PUT /courses/1
+    def update
+        return respond_with_not_found if @course.nil?
+
+        if @course.update(course_params)
+            respond_with_success @course.show
+        else
+            respond_with_error "Course not updated", @course.errors.full_messages
+        end
+    end
+
+    # DELETE /courses/1
+    def destroy
+        return respond_with_not_found if @course.nil?
+
+        unless @course.destroy
+            return respond_with_error "Course not deleted", @course.errors.full_messages
+        end
+
+        respond_with_success({ message: "Course deleted" })
+    end
+
+    private
+        # Use callbacks to share common setup or constraints between actions.
+        def set_course
+            # @course = Course.find(params.expect(:id))
+            @course = @current_user.programs.find_by(id: params[:id])
+        end
+
+        # Only allow a list of trusted parameters through.
+        def course_params
+            params.expect(course: [ :name, :description ])
+        end
 end
