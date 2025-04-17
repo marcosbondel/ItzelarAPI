@@ -1,4 +1,4 @@
-class V10::RolesController < ApplicationController
+class V10::RolesController < ApplicationApiController
   before_action :set_role, only: %i[ show update destroy ]
 
   # GET /roles

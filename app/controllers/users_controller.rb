@@ -1,5 +1,6 @@
-class V10::UsersController < ApplicationController
+class V10::UsersController < ApplicationApiController
   before_action :set_user, only: %i[ show update destroy ]
+  befire_action :authenticate_user!
 
   # GET /users
   def index

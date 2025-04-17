@@ -7,3 +7,13 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+
+User.create(
+    :name => "Admin",
+    :email => "admin@usac.edu.gt",
+    :password => "12345678"
+)
+
+puts "Running seeds..."
+puts "Admin user created"

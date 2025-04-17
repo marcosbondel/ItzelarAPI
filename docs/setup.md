@@ -1,6 +1,6 @@
 # Application Setup
 
-In order to be able to run this application locally, you are required to make the following installation.
+In order to be able to run this application locally, you are required to make the following installation and configuration.
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@ In order to be able to run this application locally, you are required to make th
 
 ### Install rbenv
 
-rbenv is a version manager tool for the Ruby programming language on Unix-like systems. It is useful for switching between multiple Ruby versions on the same machine and for ensuring that each project you are working on always runs on the correct Ruby version.
+rbenv is a version manager tool for the Ruby programming language   on Unix-like systems. It is useful for switching between multiple Ruby versions on the same machine and for ensuring that each project you are working on always runs on the correct Ruby version.
 
 In order to install rbenv on your MacOS computer follow these commands.
 We're going to make use of the default package manager of MacOS, brew, so please ensure you have it installed and up-to-date.
@@ -48,7 +48,7 @@ In order to install ruby versions follow these commands.
     # To install a specific version use this command
     rbenv install 3.4.2
 
-    # To ensure you have ruby install run this
+    # To check you have ruby install run this
     ruby --version
 
     # To make that version global (default)
