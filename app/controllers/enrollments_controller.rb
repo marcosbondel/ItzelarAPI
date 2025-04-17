@@ -18,7 +18,7 @@ class EnrollmentsController < ApplicationApiController
     # POST /enrollments
     def create
         @enrollment = @current_user.enrollments.new(enrollment_params)
-        puts "enrollment_params: #{enrollment_params}"
+        
         if @enrollment.save
             respond_with_success @enrollment.show
         else

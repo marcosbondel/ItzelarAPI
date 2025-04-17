@@ -39,6 +39,7 @@ class CoursesController < ApplicationApiController
 
     # DELETE /courses/1
     def destroy
+        puts "Current user: #{@current_user.inspect}"
         return respond_with_not_found if @course.nil?
 
         unless @course.destroy
