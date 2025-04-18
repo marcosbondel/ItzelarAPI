@@ -1,4 +1,4 @@
-# Application Setup
+# Application Setup on MacOS
 
 In order to be able to run this application locally, you are required to make the following installation and configuration.
 
@@ -139,8 +139,8 @@ common: &common
 development:
   <<: *common
   database: insignis_db_development
-  username: dev_user
-  password: dev_user
+  username: <%= Rails.application.credentials.db[:username] %>
+  password: <%= Rails.application.credentials.db[:password] %>
   port: 5432
 
 # Warning: The database defined as "test" will be erased and
@@ -149,8 +149,8 @@ development:
 test:
   <<: *common
   database: insignis_db_test
-  username: dev_user
-  password: dev_user
+  username: <%= Rails.application.credentials.db[:username] %>
+  password: <%= Rails.application.credentials.db[:password] %>
   port: 5432
 
 
@@ -159,10 +159,10 @@ test:
 production:
   <<: *common
   database: insignis_db_production
-  username: dev_user
-  password: dev_user
+  username: <%= Rails.application.credentials.db[:username] %>
+  password: <%= Rails.application.credentials.db[:password] %>
   port: 5432
-``
+```
 
 ```bash
     EDITOR="code --wait" rails credentials:edit --environment production
