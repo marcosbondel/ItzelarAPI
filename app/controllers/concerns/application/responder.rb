@@ -11,7 +11,7 @@ module Application
                 respond_with_http 400, { message: message, details: details } 
             end
 
-            def respond_with_not_found
+            def respond_with_not_found message = "Resource not found"
                 respond_with_http 404, { message: "Resource not found" } 
             end
 
