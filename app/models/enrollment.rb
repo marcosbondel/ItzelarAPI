@@ -11,6 +11,7 @@ class Enrollment < ApplicationRecord
             
             {
                 id: enrollment.id,
+                status: enrollment.status,
                 user: {
                     id: enrollment.user.id,
                     name: enrollment.user.name,
@@ -28,11 +29,6 @@ class Enrollment < ApplicationRecord
     def show
         {
             id: self.id,
-            user: {
-                id: self.user.id,
-                name: self.user.name,
-                email: self.user.email
-            },
             course: {
                 id: self.course.id,
                 name: self.course.name,
