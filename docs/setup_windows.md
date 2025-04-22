@@ -108,15 +108,17 @@ After completing all previous steps, execute these commands:
 
 ```bash
 # Install gems (if not already done)
-bundle
+# bundle
 
-# Setup database
-RAILS_ENV=development bin/rails db:create  # Create database
-bin/rails db:migrate                      # Run migrations
-bin/rails db:seed                         # Seed initial data
+# # Setup database
+# RAILS_ENV=development bin/rails db:create  # Create database
+# bin/rails db:migrate                      # Run migrations
+# bin/rails db:seed                         # Seed initial data
+
+bin/rake system:setup
 
 # Start the server
-bin/rails server
+bin/rails s
 ```
 
 Your API should now be running at `http://localhost:3000`!

@@ -2,6 +2,10 @@ class Enrollment < ApplicationRecord
     belongs_to :user
     belongs_to :course
 
+    validates :status, presence: true
+
+    enum :status, %i(enrolled completed)
+
     def self.list
         self.joins(:user, :course).map do |enrollment|
             

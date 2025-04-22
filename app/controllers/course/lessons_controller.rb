@@ -1,5 +1,6 @@
 module Course
     class LessonsController < ApplicationApiController
+        before_action :set_course
         before_action :set_lesson, only: %i[ show update destroy ]
 
         # GET /lessons
@@ -40,6 +41,10 @@ module Course
         end
 
         private
+            def set_course
+                @course = Course.find(params.expect(:course_id))
+            end
+
             # Use callbacks to share common setup or constraints between actions.
             def set_lesson
                 @lesson = Lesson.find(params.expect(:id))

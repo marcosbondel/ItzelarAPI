@@ -35,7 +35,7 @@ module Auth
                     :message => "Sign up successful",
                 )
             else
-                return respond_with_error
+                return respond_with_error "Error", new_user.errors.full_messages.join(", ")
             end
 
             respond_with_success response

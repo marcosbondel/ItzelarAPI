@@ -3,7 +3,7 @@ class CoursesController < ApplicationApiController
 
     # GET /courses
     def index
-        @courses = @current_user.programs
+        @courses = @current_user.courses
         
         respond_with_success @courses.list
     end
@@ -17,7 +17,7 @@ class CoursesController < ApplicationApiController
 
     # POST /courses
     def create
-        @course = @current_user.programs.new(course_params)
+        @course = @current_user.courses.new(course_params)
 
         unless @course.save
             return respond_with_error "Course not created", @course.errors.full_messages
@@ -39,7 +39,6 @@ class CoursesController < ApplicationApiController
 
     # DELETE /courses/1
     def destroy
-        puts "Current user: #{@current_user.inspect}"
         return respond_with_not_found if @course.nil?
 
         unless @course.destroy
@@ -53,11 +52,11 @@ class CoursesController < ApplicationApiController
         # Use callbacks to share common setup or constraints between actions.
         def set_course
             # @course = Course.find(params.expect(:id))
-            @course = @current_user.programs.find_by(id: params[:id])
+            @course = @current_user.courses.find_by(id: params[:id])
         end
 
         # Only allow a list of trusted parameters through.
         def course_params
-            params.expect(course: [ :name, :description ])
+            params.expect(course: [ :name, :description, :category ])
         end
 end

@@ -29,6 +29,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_17_032154) do
     t.string "name"
     t.text "description"
     t.bigint "user_id", null: false
+    t.integer "category", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_courses_on_user_id"
@@ -37,6 +38,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_17_032154) do
   create_table "enrollments", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "course_id", null: false
+    t.integer "status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_enrollments_on_course_id"
@@ -91,6 +93,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_17_032154) do
     t.string "lastname"
     t.string "email"
     t.string "password_digest"
+    t.integer "ranking", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "role_id", null: false

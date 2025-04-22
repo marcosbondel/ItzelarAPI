@@ -2,45 +2,39 @@
 
 ## 1️⃣ Autenticación (Usuarios)
 ### 🔹 Registro de Usuario
-**POST** `/api/signup.json`  
+**POST** `/auth/sign_up.json`  
 **Parámetros (JSON)**  
 ```json
 {
-  "nombre": "Juan Pérez",
-  "correo": "juan@example.com",
-  "contraseña": "secreta123",
-  "rol_id": 2
+    "user": {
+        "email": "test@gmail.com",
+        "name": "test name",
+        "lastname": "test lastname",
+        "password": "123" 
+    }
 }
 ```
-**Respuesta (201 - Created)**
+**Respuesta (200 - Created)**
 ```json
 {
-  "id": 1,
-  "nombre": "Juan Pérez",
-  "correo": "juan@example.com",
-  "rol": "Estudiante",
-  "token": "jwt_token_aqui"
+    "message": "Sign up successful"
 }
 ```
 
 ### 🔹 Inicio de Sesión
-**POST** `/api/login.json`  
+**POST** `/auth/sign_in.json`  
 **Parámetros (JSON)**
 ```json
 {
-  "correo": "juan@example.com",
-  "contraseña": "secreta123"
+    "email": "jodertio@gmail.com",
+    "password": "123" 
 }
 ```
 **Respuesta (200 - OK)**
 ```json
 {
-  "token": "jwt_token_aqui",
-  "usuario": {
-    "id": 1,
-    "nombre": "Juan Pérez",
-    "rol": "Estudiante"
-  }
+    "message": "Sign in successful",
+    "token": "...."
 }
 ```
 
@@ -48,36 +42,36 @@
 
 ## 2️⃣ Usuarios
 ### 🔹 Obtener Perfil de Usuario
-**GET** `/api/users/:id.json`  
+**GET** `/users/:id.json`  
 **Headers:** `Authorization: Bearer <token>`  
 **Respuesta (200 - OK)**
 ```json
 {
-  "id": 1,
-  "nombre": "Juan Pérez",
-  "correo": "juan@example.com",
-  "rol": "Estudiante"
+"id": 1,
+"nombre": "Juan Pérez",
+"correo": "juan@example.com",
+"rol": "Estudiante"
 }
 ```
 
 ### 🔹 Listar Usuarios (Admin)
-**GET** `/api/users.json`  
+**GET** `/users.json`  
 **Headers:** `Authorization: Bearer <admin_token>`  
 **Respuesta (200 - OK)**
 ```json
 [
-  {
-    "id": 1,
-    "nombre": "Juan Pérez",
-    "correo": "juan@example.com",
-    "rol": "Estudiante"
-  },
-  {
-    "id": 2,
-    "nombre": "María López",
-    "correo": "maria@example.com",
-    "rol": "Profesor"
-  }
+{
+"id": 1,
+"nombre": "Juan Pérez",
+"correo": "juan@example.com",
+"rol": "Estudiante"
+},
+{
+"id": 2,
+"nombre": "María López",
+"correo": "maria@example.com",
+"rol": "Profesor"
+}
 ]
 ```
 
@@ -85,50 +79,63 @@
 
 ## 3️⃣ Cursos
 ### 🔹 Listar Cursos
-**GET** `/api/courses.json`  
+**GET** `/courses.json`  
 **Respuesta (200 - OK)**
 ```json
 [
-  {
-    "id": 1,
-    "nombre": "Matemáticas Avanzadas",
-    "descripcion": "Curso de cálculo diferencial e integral",
-    "profesor": "María López"
-  }
+{
+"id": 1,
+"nombre": "Matemáticas Avanzadas",
+"descripcion": "Curso de cálculo diferencial e integral",
+"profesor": "María López"
+}
 ]
 ```
 
 ### 🔹 Crear Curso (Profesor)
-**POST** `/api/courses.json`  
+**POST** `/courses.json`  
 **Headers:** `Authorization: Bearer <profesor_token>`  
 **Parámetros (JSON)**
 ```json
 {
-  "nombre": "Física Cuántica",
-  "descripcion": "Fundamentos de la mecánica cuántica"
+"nombre": "Física Cuántica",
+"descripcion": "Fundamentos de la mecánica cuántica"
 }
 ```
 **Respuesta (201 - Created)**
 ```json
 {
-  "id": 2,
-  "nombre": "Física Cuántica",
-  "descripcion": "Fundamentos de la mecánica cuántica",
-  "profesor": "María López"
+"id": 2,
+"nombre": "Física Cuántica",
+"descripcion": "Fundamentos de la mecánica cuántica",
+"profesor": "María López"
 }
 ```
 
 ### 🔹 Inscribirse a un Curso (Estudiante)
-**POST** `/api/courses/:id/enroll.json`  
+**POST** `/courses/:id/enroll.json`  
 **Headers:** `Authorization: Bearer <estudiante_token>`  
 **Respuesta (201 - Created)**
 ```json
 {
-  "mensaje": "Inscripción exitosa",
-  "curso": "Matemáticas Avanzadas"
+"mensaje": "Inscripción exitosa",
+"curso": "Matemáticas Avanzadas"
 }
 ```
 
 ---
 
 
+
+
+```
+
+    # Admin
+    /admin/courses.json
+
+    /admin/courses/:id/lessons.json
+
+    # User
+    /enrollments.json
+
+```

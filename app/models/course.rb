@@ -2,17 +2,23 @@ class Course < ApplicationRecord
     belongs_to :user
     
     has_many :exams, dependent: :destroy
+    has_many :lessons, dependent: :destroy
     has_many :enrollments, dependent: :destroy
-    has_many :students, through: :enrollments
+    has_many :students, through: :enrollments, source: :user
 
     validates :name, presence: true
     validates :description, presence: true
+    validates :category, presence: true
+
+    enum :category, %i(math physics chemistry biology history geography literature art music sports)
+
 
     def self.list
         self.select(
             :id,
             :name,
             :description,
+            :category
         )
     end
 
@@ -21,6 +27,7 @@ class Course < ApplicationRecord
             id: id,
             name: name,
             description: description,
+            category: category,
             students_enrolled_count: students.count,
             students_enrolled: students.map { |student| { id: student.id, name: student.name, lastname: student.lastname, email: student.email } },
             teacher: {

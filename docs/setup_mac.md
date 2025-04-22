@@ -175,5 +175,6 @@ production:
 ```
 
 ```bash
-    bin/rails db:migrate
+    bin/rake system:setup
+    bin/rails s
 ```
