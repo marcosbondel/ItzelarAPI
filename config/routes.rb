@@ -10,12 +10,14 @@ Rails.application.routes.draw do
     resources :roles
     resources :enrollments
     resources :courses do
-        resources :lessons
-        
-        resources :examns do
-            resources :questions do
-                resources :options
-                resources :answers
+        scope module: :course do
+            resources :lessons
+            
+            resources :examns do
+                resources :questions do
+                    resources :options
+                    resources :answers
+                end
             end
         end
     end
