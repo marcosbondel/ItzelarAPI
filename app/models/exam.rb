@@ -1,5 +1,8 @@
 class Exam < ApplicationRecord
     belongs_to :course
 
-    validates :title, presence: true
+    has_many :questions, class_name: "::Question", dependent: :destroy
+
+    # validates :title, presence: true
+    # validates :description, presence: true
 end

@@ -1,17 +1,16 @@
 class Course < ApplicationRecord
     belongs_to :user
     
-    has_many :exams, dependent: :destroy
-    has_many :lessons, dependent: :destroy
     has_many :enrollments, dependent: :destroy
     has_many :students, through: :enrollments, source: :user
+    has_many :lessons, dependent: :destroy
+    has_many :exams, class_name: "::Exam", dependent: :destroy
 
     validates :name, presence: true
     validates :description, presence: true
     validates :category, presence: true
 
     enum :category, %i(math physics chemistry biology history geography literature art music sports)
-
 
     def self.list
         self.select(
