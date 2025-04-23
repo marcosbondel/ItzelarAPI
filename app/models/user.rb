@@ -7,6 +7,8 @@ class User < ApplicationRecord
     has_many :subjects, through: :enrollments
 
     has_many :courses, class_name: "Course"
+
+    has_many :answers
     
     validates :name, presence: true
     validates :email, presence: true, uniqueness: { case_sensitive: false }

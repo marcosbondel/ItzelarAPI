@@ -1,6 +1,7 @@
 class Question < ApplicationRecord
     belongs_to :exam
 
+    has_one :answer, class_name: "::Answer", dependent: :destroy
     has_many :options, class_name: "::Option", dependent: :destroy
 
     validates :question_text, presence: true
