@@ -65,7 +65,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_17_032154) do
   end
 
   create_table "options", force: :cascade do |t|
-    t.string "option"
+    t.string "option_text"
     t.boolean "is_correct"
     t.bigint "question_id", null: false
     t.datetime "created_at", null: false
