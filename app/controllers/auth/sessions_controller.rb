@@ -14,6 +14,7 @@ module Auth
                 return respond_with_success({ 
                     :message => "Sign in successful",
                     :token => encode({ user_id: user.id}),
+                    :role => user.role.name,
                 })
             else
                 return respond_with_error "Invalid credentials"
