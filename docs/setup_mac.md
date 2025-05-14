@@ -138,7 +138,7 @@ common: &common
 
 development:
   <<: *common
-  database: insignis_db_development
+  database: Itzelar_db_development
   username: <%= Rails.application.credentials.db[:username] %>
   password: <%= Rails.application.credentials.db[:password] %>
   port: 5432
@@ -148,7 +148,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *common
-  database: insignis_db_test
+  database: Itzelar_db_test
   username: <%= Rails.application.credentials.db[:username] %>
   password: <%= Rails.application.credentials.db[:password] %>
   port: 5432
@@ -158,7 +158,7 @@ test:
 # is mounted as a persistent Docker volume in config/deploy.yml.
 production:
   <<: *common
-  database: insignis_db_production
+  database: Itzelar_db_production
   username: <%= Rails.application.credentials.db[:username] %>
   password: <%= Rails.application.credentials.db[:password] %>
   port: 5432
