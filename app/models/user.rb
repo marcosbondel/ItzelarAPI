@@ -5,12 +5,10 @@ class User < ApplicationRecord
     
     has_many :enrollments, dependent: :destroy
     has_many :subjects, through: :enrollments
-
     has_many :courses, class_name: "Course"
-
     has_many :answers
+    has_many :sessions
     
     validates :name, presence: true
     validates :email, presence: true, uniqueness: { case_sensitive: false }
-
 end

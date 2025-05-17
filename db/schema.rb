@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_17_032154) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_17_061056) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -88,6 +88,23 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_17_032154) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_sessions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "user_uuid"
+    t.string "user_agent"
+    t.integer "usage_count", default: 0
+    t.string "ip_address"
+    t.string "session_uuid"
+    t.string "session_token"
+    t.integer "session_source"
+    t.datetime "expires_at"
+    t.datetime "last_used_at"
+    t.datetime "revoked_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_sessions_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "lastname"
@@ -109,5 +126,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_17_032154) do
   add_foreign_key "lessons", "courses"
   add_foreign_key "options", "questions"
   add_foreign_key "questions", "exams"
+  add_foreign_key "user_sessions", "users"
   add_foreign_key "users", "roles"
 end

@@ -7,16 +7,16 @@ module Application
                 respond_with_http 200, data
             end
 
-            def respond_with_error message = "Something went wrong", details = []
+            def respond_with_error message = 'Something went wrong', details = []
                 respond_with_http 400, { message: message, details: details } 
             end
 
-            def respond_with_not_found message = "Resource not found"
-                respond_with_http 404, { message: "Resource not found" } 
+            def respond_with_not_found message = 'Resource not found'
+                respond_with_http 404, { message: message } 
             end
 
-            def respond_with_unauthorized
-                respond_with_http 401, { message: "Unauthorized" }
+            def respond_with_unauthorized message = 'Unauthorized' 
+                respond_with_http 401, { message: message }
             end
     
             def respond_with_http status, payload
