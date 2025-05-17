@@ -12,12 +12,23 @@ class User < ApplicationRecord
     validates :name, presence: true
     validates :email, presence: true, uniqueness: { case_sensitive: false }
 
-
     def show
         {
             :name => self.name,
             :lastname => self.lastname,
             :email => self.email
         }
+    end
+
+    def admin?
+        self.role.name.eql? 'admin'
+    end
+    
+    def professor?
+        self.role.name.eql? 'professor'
+    end
+    
+    def student?
+        self.role.name.eql? 'student'
     end
 end

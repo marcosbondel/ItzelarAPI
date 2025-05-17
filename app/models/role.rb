@@ -5,7 +5,7 @@ class Role < ApplicationRecord
 
     # enum name: {
     #     student: "student",
-    #     teacher: "teacher",
+    #     professor: "professor",
     #     admin: "admin"
     # }
 end

@@ -9,9 +9,7 @@ Rails.application.routes.draw do
 
     # /user/profile
     namespace :user do
-        
         resource :profile, only: %i(show)
-    
     end
     
     resources :roles
@@ -38,5 +36,4 @@ Rails.application.routes.draw do
             end
         end
     end
-    
 end
