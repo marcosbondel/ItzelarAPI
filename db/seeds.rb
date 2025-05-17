@@ -1,6 +1,6 @@
 puts "Running seeds..."
 puts "Creating roles..."
-['student', 'teacher', 'admin'].each do |role|
+['student', 'professor', 'admin'].each do |role|
     Role.find_or_create_by(name: role)
 end
 
