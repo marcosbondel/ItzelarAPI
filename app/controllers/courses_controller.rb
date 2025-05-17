@@ -19,6 +19,8 @@ class CoursesController < ApplicationApiController
     def create
         @course = @current_user.courses.new(course_params)
 
+        authorize @course
+
         unless @course.save
             return respond_with_error "Course not created", @course.errors.full_messages
         end
@@ -30,6 +32,8 @@ class CoursesController < ApplicationApiController
     def update
         return respond_with_not_found if @course.nil?
 
+        authorize @course
+
         if @course.update(course_params)
             respond_with_success @course.show
         else
@@ -40,6 +44,8 @@ class CoursesController < ApplicationApiController
     # DELETE /courses/1
     def destroy
         return respond_with_not_found if @course.nil?
+
+        authorize @course
 
         unless @course.destroy
             return respond_with_error "Course not deleted", @course.errors.full_messages

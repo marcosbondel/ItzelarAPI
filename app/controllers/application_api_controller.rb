@@ -1,13 +1,15 @@
 class ApplicationApiController < ApplicationController
     include System::Jwt
-    before_action :authorize_request
+    before_action :authenticate_request
+
+    rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
     attr_reader :current_user
     attr_reader :current_session
     
     private 
 
-        def authorize_request
+        def authenticate_request
             header = request.headers['Authorization']
             token = header.split(' ').last if header
             
@@ -25,5 +27,9 @@ class ApplicationApiController < ApplicationController
             end
 
             @current_user = @current_session.user
+        end
+
+        def user_not_authorized
+            respond_with_unauthorized "You're not allowed"
         end
 end
