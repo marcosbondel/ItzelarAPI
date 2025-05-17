@@ -6,6 +6,13 @@ Rails.application.routes.draw do
         post :sign_up, to: 'sessions#sign_up'
         post :logout, to: 'sessions#logout'
     end
+
+    # /user/profile
+    namespace :user do
+        
+        resource :profile, only: %i(show)
+    
+    end
     
     resources :roles
     resources :enrollments

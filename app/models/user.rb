@@ -11,4 +11,13 @@ class User < ApplicationRecord
     
     validates :name, presence: true
     validates :email, presence: true, uniqueness: { case_sensitive: false }
+
+
+    def show
+        {
+            :name => self.name,
+            :lastname => self.lastname,
+            :email => self.email
+        }
+    end
 end
