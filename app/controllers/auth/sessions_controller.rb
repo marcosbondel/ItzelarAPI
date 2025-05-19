@@ -30,15 +30,7 @@ module Auth
 
                 return respond_with_success({ 
                     :message => 'Sign in successful',
-                    # :token => encode({ user_id: user.id}),
                     :token => token,
-                    :user => {
-                        :id => user.id,
-                        :name => user.name,
-                        :lastname => user.lastname,
-                        :email => user.email,
-                        :role => user.role.name
-                    }
                 })
             else
                 return respond_with_error "Invalid credentials"
@@ -67,6 +59,31 @@ module Auth
         end
         
         def logout
+            header = request.headers['Authorization']
+            token = header.split(' ').last if header
+            
+            decoded = decode(token)
+
+            return respond_with_unauthorized unless decoded
+            
+            @current_session = User::Session.find_by(
+                :user_uuid => decoded[0]['sub'], 
+                :session_uuid => decoded[0]['jti'],
+            )
+
+            return respond_with_error unless @current_session
+
+            if @current_session.revoked_at?
+                return respond_with_unauthorized 
+            end
+
+            unless @current_session.user_agent.eql? request.user_agent
+                @current_session.update_attribute(:revoked_at, Time.current)
+                return respond_with_unauthorized 
+            end
+
+            @current_session.destroy!
+
             response = {
                 :message => "Sign out successful",
             }

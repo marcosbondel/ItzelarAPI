@@ -19,6 +19,12 @@ Rails.application.routes.draw do
         scope module: :user do
             resources :answers
         end
+        # collection do
+        #     post :logout
+        # end
+        member do
+            post :logout
+        end
     end
 
     resources :courses do

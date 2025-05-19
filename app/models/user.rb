@@ -5,7 +5,7 @@ class User < ApplicationRecord
     
     has_many :enrollments, dependent: :destroy
     has_many :subjects, through: :enrollments
-    has_many :courses, class_name: "Course"
+    has_many :courses
     has_many :answers
     has_many :sessions
     
@@ -16,7 +16,8 @@ class User < ApplicationRecord
         {
             :name => self.name,
             :lastname => self.lastname,
-            :email => self.email
+            :email => self.email,
+            :role => self.role.name
         }
     end
 
