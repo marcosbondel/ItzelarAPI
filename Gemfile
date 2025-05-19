@@ -49,7 +49,7 @@ end
 gem "pg"
 gem "jwt", "~> 2.10"
 gem "rack-cors", "~> 3.0"
-gem 'rdoc', '~> 6.13'
+gem 'rdoc', '~> 6.14'
 gem 'L2', '~> 0.6.5'
 
 gem "pundit", "~> 2.5"
