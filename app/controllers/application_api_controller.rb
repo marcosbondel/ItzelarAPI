@@ -22,7 +22,7 @@ class ApplicationApiController < ApplicationController
                 :session_uuid => decoded[0]['jti']
             )
 
-            return respond_with_unauthorized "Please, sign in again" unless @current_session
+            return respond_with_unauthorized "Please, sign in" unless @current_session
             
             # We check if the token has been revoked
             if @current_session.revoked_at?
@@ -44,6 +44,7 @@ class ApplicationApiController < ApplicationController
             @current_session.update_attribute(:last_used_at, Time.current)
         end
 
+        # Pundit custom response
         def user_not_authorized
             respond_with_unauthorized "You're not allowed"
         end

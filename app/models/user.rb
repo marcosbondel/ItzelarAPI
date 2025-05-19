@@ -26,10 +26,20 @@ class User < ApplicationRecord
     def show
         {
             :name => self.name,
-            :lastname => self.lastname,
+            :lastname => self.lastname || '',
             :email => self.email,
             :role => self.role.name
         }
+    end
+
+    def self.list
+        self.joins(:role).select(
+            :id,
+            :name,
+            :lastname,
+            :email,
+            "roles.name as role_name"
+        )
     end
 
     def admin?
