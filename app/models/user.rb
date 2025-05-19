@@ -12,6 +12,17 @@ class User < ApplicationRecord
     validates :name, presence: true
     validates :email, presence: true, uniqueness: { case_sensitive: false }
 
+    validates :password, presence: true, length: { minimum: 8 }, if: :password
+    validate :password_complexity, if: :password
+
+    def password_complexity
+        return if password.blank?
+
+        unless password.match?(/\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])/)
+            errors.add :password, 'Must include at least one lowercase letter, one uppercase letter, one digit, and one special character'
+        end
+    end
+    
     def show
         {
             :name => self.name,
