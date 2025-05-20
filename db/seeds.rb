@@ -8,6 +8,6 @@ puts "Creating admin..."
 User.create(
     :name => "Admin",
     :email => "admin@usac.edu.gt",
-    :password => "admin",
+    :password => "admin1234#",
     :role => Role.find_by(name: "admin")
 )
