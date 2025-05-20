@@ -31,6 +31,7 @@ module Auth
                 return respond_with_success({ 
                     :message => 'Sign in successful',
                     :token => token,
+                    :default_path => current_session.user.role.default_path
                 })
             else
                 return respond_with_error "Invalid credentials"

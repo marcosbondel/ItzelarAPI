@@ -1,13 +1,26 @@
 puts "Running seeds..."
 puts "Creating roles..."
-['student', 'professor', 'admin'].each do |role|
-    Role.find_or_create_by(name: role)
+[
+    {
+        :name => 'admin',
+        :default_path => '/admin'
+    }, 
+    {
+        :name => 'professor',
+        :default_path => '/teacher'
+    }, 
+    {
+        :name => 'student',
+        :default_path => '/student'
+    }, 
+].each do |role|
+    Role.create!(name: role[:name], default_path: role[:default_path] )
 end
 
 puts "Creating admin..."
-User.create(
+User.create!(
     :name => "Admin",
     :email => "admin@usac.edu.gt",
-    :password => "admin1234#",
+    :password => "Admin1234#",
     :role => Role.find_by(name: "admin")
 )
