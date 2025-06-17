@@ -47,7 +47,7 @@ group :development, :test do
 end
 
 gem "pg"
-gem "jwt", "~> 2.10"
+gem "jwt", "~> 3.0"
 gem "rack-cors", "~> 3.0"
 gem 'rdoc', '~> 6.14'
 gem 'L2', '~> 0.6.5'
