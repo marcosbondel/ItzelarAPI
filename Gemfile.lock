@@ -94,7 +94,7 @@ GEM
     dotenv (3.1.8)
     drb (2.2.3)
     ed25519 (1.4.0)
-    erb (5.0.2)
+    erb (5.0.3)
     erubi (1.13.1)
     et-orbi (1.2.11)
       tzinfo
@@ -234,9 +234,10 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.3.0)
-    rdoc (6.14.2)
+    rdoc (6.15.0)
       erb
       psych (>= 4.0.0)
+      tsort
     regexp_parser (2.10.0)
     reline (0.6.2)
       io-console (~> 0.5)
@@ -337,7 +338,7 @@ DEPENDENCIES
   pundit (~> 2.5)
   rack-cors (~> 3.0)
   rails (= 8.0.3)
-  rdoc (~> 6.14)
+  rdoc (~> 6.15)
   rubocop-rails-omakase
   solid_cable
   solid_cache
